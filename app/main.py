@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from app import database
 from app.api.routes_cities import router as cities_router
 from app.api.routes_health import router as health_router
+from app.api.routes_weather import router as weather_router
 from app.config import get_settings
 
 
@@ -21,3 +22,4 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 app = FastAPI(title=settings.APP_NAME, lifespan=lifespan)
 app.include_router(health_router)
 app.include_router(cities_router)
+app.include_router(weather_router)
