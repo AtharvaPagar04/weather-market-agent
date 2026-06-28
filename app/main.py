@@ -1,11 +1,23 @@
+from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
+from app import database
+from app.api.routes_cities import router as cities_router
 from app.api.routes_health import router as health_router
 from app.config import get_settings
 
 
 settings = get_settings()
 
-app = FastAPI(title=settings.APP_NAME)
-app.include_router(health_router)
 
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    database.init_db()
+    yield
+
+
+app = FastAPI(title=settings.APP_NAME, lifespan=lifespan)
+app.include_router(health_router)
+app.include_router(cities_router)
