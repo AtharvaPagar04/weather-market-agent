@@ -6,3 +6,7 @@ python-dotenv
 pytest
 httpx
 sqlalchemy
+streamlit
+requests
+pandas
+plotly
