@@ -5,6 +5,7 @@ from fastapi import FastAPI
 
 from app import database
 from app.api.routes_agent import router as agent_router
+from app.api.routes_alerts import router as alerts_router
 from app.api.routes_cities import router as cities_router
 from app.api.routes_health import router as health_router
 from app.api.routes_markets import router as markets_router
@@ -40,3 +41,4 @@ app.include_router(positions_router)
 app.include_router(agent_router)
 app.include_router(evaluation_router)
 app.include_router(demo_router)
+app.include_router(alerts_router)

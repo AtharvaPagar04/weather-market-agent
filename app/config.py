@@ -33,6 +33,10 @@ class Settings(BaseSettings):
     MAX_TRADE_RISK_PCT: float = 0.02
     MAX_TOTAL_EXPOSURE_PCT: float = 0.10
 
+    TELEGRAM_ALERTS_ENABLED: bool = False
+    TELEGRAM_BOT_TOKEN: str = ""
+    TELEGRAM_CHAT_ID: str = ""
+
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 
