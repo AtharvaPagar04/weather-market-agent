@@ -111,11 +111,13 @@ curl -X POST http://127.0.0.1:8000/agent/run \
 curl -X POST http://127.0.0.1:8000/demo/export
 ```
 
-Or:
+Final one-command smoke test:
 
 ```bash
-./.venv/bin/python scripts/run_demo_export.py
+./.venv/bin/python scripts/final_smoke_test.py
 ```
+
+The smoke test validates export behavior in an isolated temporary workspace. Use `POST /demo/export` when you want to refresh the repository `demo_output/` files.
 
 Generated files:
 
@@ -140,6 +142,9 @@ Alerts are disabled by default. If disabled or missing configuration, the API re
 - `docs/submission_checklist.md`
 - `docs/evaluator_architecture_summary.md`
 - `docs/scale_and_deployment.md`
+- `docs/final_demo_script.md`
+- `docs/final_submission_package.md`
+- `scripts/final_smoke_test.py`
 
 ## Known Limitations
 
