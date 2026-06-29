@@ -1,0 +1,10 @@
+{
+  "pm_trader_available": false,
+  "readonly_mode": true,
+  "order_execution_enabled": false,
+  "source": "mock_or_unavailable",
+  "paper_trading_only": true,
+  "simulated_results": true,
+  "demo_results": true,
+  "message": "Polymarket paper-trader integration is read-only/mock fallback in this demo environment."
+}
