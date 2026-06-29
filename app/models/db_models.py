@@ -109,6 +109,7 @@ class RiskReport(Base):
     __tablename__ = "risk_reports"
 
     id = Column(Integer, primary_key=True, index=True)
+    city_id = Column(Integer, ForeignKey("cities.id"), nullable=True, index=True)
     prediction_id = Column(Integer, ForeignKey("predictions.id"), nullable=False, index=True)
     market_snapshot_id = Column(Integer, ForeignKey("market_snapshots.id"), nullable=True, index=True)
     market_slug = Column(String(240), nullable=False, index=True)
@@ -127,6 +128,13 @@ class RiskReport(Base):
     blocked_reason = Column(Text, nullable=True)
     risk_level = Column(String(40), nullable=True)
     risk_decision = Column(String(80), nullable=True)
+    bankroll = Column(Float, nullable=True)
+    max_trade_risk_pct = Column(Float, nullable=True)
+    max_total_exposure_pct = Column(Float, nullable=True)
+    current_total_exposure = Column(Float, nullable=True)
+    kelly_fraction = Column(Float, nullable=True)
+    fractional_kelly_fraction = Column(Float, nullable=True)
+    reason = Column(Text, nullable=True)
     created_at = Column(DateTime, nullable=False, default=utc_now)
 
 
