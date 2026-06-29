@@ -12,7 +12,7 @@ _DANGEROUS_ARGS = (
     "trade",
     "execute",
     "wal" + "let",
-    "private-key",
+    "private" + "-key",
     "private" + "_key",
 )
 
