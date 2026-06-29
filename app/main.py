@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app import database
+from app.api.routes_agent import router as agent_router
 from app.api.routes_cities import router as cities_router
 from app.api.routes_health import router as health_router
 from app.api.routes_markets import router as markets_router
@@ -35,3 +36,4 @@ app.include_router(predictions_router)
 app.include_router(risk_router)
 app.include_router(paper_trades_router)
 app.include_router(positions_router)
+app.include_router(agent_router)
