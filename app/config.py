@@ -18,6 +18,11 @@ class Settings(BaseSettings):
     PM_TRADER_USE_MOCK_FALLBACK: bool = True
     PM_TRADER_COMMAND: str = "pm-trader"
     PM_TRADER_TIMEOUT_SECONDS: int = 10
+    PM_TRADER_PAPER_EXECUTION_ENABLED: bool = False
+
+    PAPER_TRADING_ENABLED: bool = True
+    PAPER_TRADING_DEFAULT_BANKROLL: float = 1000.0
+    PAPER_TRADING_EXECUTION_SOURCE: str = "local_simulation"
 
     USE_MOCK_MARKETS: bool = True
     USE_MOCK_WEATHER: bool = False
