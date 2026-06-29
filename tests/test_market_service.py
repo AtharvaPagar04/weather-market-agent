@@ -33,6 +33,10 @@ def test_refresh_markets_creates_mock_snapshots_for_mvp_cities(tmp_path, monkeyp
             "source_type": "mock",
             "fallback_used": True,
             "failed_markets": [],
+            "pm_trader_enabled": False,
+            "pm_trader_available": False,
+            "readonly_mode": True,
+            "order_execution_enabled": False,
         }
         snapshots = db.query(MarketSnapshot).all()
         assert len(snapshots) == 5
@@ -40,6 +44,25 @@ def test_refresh_markets_creates_mock_snapshots_for_mvp_cities(tmp_path, monkeyp
         assert all(0 <= snapshot.yes_price <= 1 for snapshot in snapshots)
         assert all(0 <= snapshot.no_price <= 1 for snapshot in snapshots)
         assert all(0 <= snapshot.implied_probability <= 1 for snapshot in snapshots)
+    finally:
+        db.close()
+
+
+def test_refresh_markets_uses_mock_fallback_when_pm_trader_disabled(tmp_path, monkeypatch) -> None:
+    db = _session(tmp_path, monkeypatch)
+    try:
+        CityService.seed_default_cities(db)
+
+        result = MarketService().refresh_markets(db, force_mock=False, use_mock_if_unavailable=True)
+
+        assert result["success"] is True
+        assert result["market_snapshots_created"] == 5
+        assert result["source_type"] == "mock"
+        assert result["fallback_used"] is True
+        assert result["pm_trader_enabled"] is False
+        assert result["pm_trader_available"] is False
+        assert result["readonly_mode"] is True
+        assert result["order_execution_enabled"] is False
     finally:
         db.close()
 
