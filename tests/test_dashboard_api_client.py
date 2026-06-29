@@ -40,6 +40,19 @@ def test_run_agent_calls_agent_run(mock_post):
     )
 
 @patch("requests.get")
+def test_get_prediction_history_calls_correct_endpoint(mock_get):
+    mock_response = Mock()
+    mock_response.json.return_value = [{"id": 1}]
+    mock_response.raise_for_status = Mock()
+    mock_get.return_value = mock_response
+    
+    client = BackendAPIClient(base_url="http://test")
+    res = client.get_prediction_history(city_id=1)
+    
+    assert res == [{"id": 1}]
+    mock_get.assert_called_once_with("http://test/predictions/history/1?limit=25", timeout=10.0)
+
+@patch("requests.get")
 def test_list_endpoints_return_empty_list_on_failure(mock_get):
     mock_get.side_effect = requests.RequestException("Connection error")
     client = BackendAPIClient()
