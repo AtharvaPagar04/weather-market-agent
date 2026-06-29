@@ -116,6 +116,9 @@ class PaperTradingService:
                 market_snapshot=market_snapshot,
                 reason=risk_report.blocked_reason or "risk_report_not_approved",
             )
+            
+        if risk_report.risk_decision not in {"PAPER_TRADE_SMALL", "PAPER_TRADE_NORMAL"}:
+            return self._skipped_order(city_id, risk_report, prediction, market_snapshot, "risk_decision_not_approved")
 
         if risk_report.recommended_side not in {"YES", "NO"}:
             return self._skipped_order(city_id, risk_report, prediction, market_snapshot, "recommended_side_invalid")
@@ -182,7 +185,7 @@ class PaperTradingService:
             "edge": risk_report.raw_edge,
             "risk_level": risk_report.risk_level,
             "status": "paper_order_skipped",
-            "paper_execution_source": self.settings.PAPER_TRADING_EXECUTION_SOURCE,
+            "paper_execution_source": "local_simulation",
             "audit_sync_status": "local_only",
             "reason": reason,
         }

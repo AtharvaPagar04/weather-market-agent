@@ -90,6 +90,15 @@ class PredictionService:
             query = query.filter(Prediction.city_id == city_id)
         return query.order_by(Prediction.created_at.desc()).all()
 
+    def get_prediction_history(self, db: Session, city_id: int, limit: int = 25) -> list[Prediction]:
+        return (
+            db.query(Prediction)
+            .filter(Prediction.city_id == city_id)
+            .order_by(Prediction.created_at.desc(), Prediction.id.desc())
+            .limit(limit)
+            .all()
+        )
+
     def _latest_weather_snapshots_for_city(self, db: Session, city_id: int) -> list[WeatherSnapshot]:
         snapshots = (
             db.query(WeatherSnapshot)
