@@ -16,9 +16,13 @@ class PositionService:
             )
             .first()
         )
-        order_size = paper_order.size or paper_order.requested_amount or 0.0
-        notional_value = paper_order.notional_value or paper_order.requested_amount or 0.0
-        simulated_price = paper_order.simulated_price or 0.0
+        notional_value = float(paper_order.notional_value or paper_order.requested_amount or 0.0)
+        simulated_price = float(paper_order.simulated_price or 0.0)
+
+        if simulated_price > 0:
+            order_units = notional_value / simulated_price
+        else:
+            order_units = 0.0
 
         if existing_position is None:
             existing_position = Position(
@@ -39,7 +43,7 @@ class PositionService:
             )
             db.add(existing_position)
 
-        existing_position.total_size = (existing_position.total_size or 0.0) + order_size
+        existing_position.total_size = (existing_position.total_size or 0.0) + order_units
         existing_position.total_cost = (existing_position.total_cost or 0.0) + notional_value
         existing_position.average_price = (
             existing_position.total_cost / existing_position.total_size

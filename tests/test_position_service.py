@@ -1,3 +1,4 @@
+import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -55,7 +56,7 @@ def test_second_order_for_same_market_side_updates_existing_position(tmp_path, m
     db = _session(tmp_path, monkeypatch)
     try:
         first = _order(amount=10.0, price=0.5)
-        second = _order(amount=20.0, price=0.7)
+        second = _order(amount=20.0, price=0.5)
         db.add_all([first, second])
         db.flush()
 
@@ -65,7 +66,7 @@ def test_second_order_for_same_market_side_updates_existing_position(tmp_path, m
 
         position = db.query(Position).first()
         assert db.query(Position).count() == 1
-        assert position.total_size == 30.0
+        assert position.total_size == 60.0
         assert position.total_cost == 30.0
     finally:
         db.close()
@@ -89,7 +90,7 @@ def test_average_price_calculation_is_deterministic(tmp_path, monkeypatch) -> No
     db = _session(tmp_path, monkeypatch)
     try:
         first = _order(amount=10.0, price=0.5)
-        second = _order(amount=30.0, price=0.8)
+        second = _order(amount=30.0, price=0.75)
         db.add_all([first, second])
         db.flush()
 
@@ -97,7 +98,7 @@ def test_average_price_calculation_is_deterministic(tmp_path, monkeypatch) -> No
         service.update_position_from_order(db, first)
         service.update_position_from_order(db, second)
 
-        assert db.query(Position).first().average_price == 1.0
+        assert db.query(Position).first().average_price == pytest.approx(40.0 / 60.0)
     finally:
         db.close()
 

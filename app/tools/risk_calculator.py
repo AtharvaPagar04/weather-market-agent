@@ -42,6 +42,11 @@ class RiskCalculator:
             fractional_kelly_fraction=fractional_kelly_fraction,
         )
         risk_decision = _risk_decision(trade_allowed, recommended_size, bankroll, confidence, liquidity_score)
+        if risk_decision in {"NO_TRADE", "WATCH", "MANUAL_REVIEW"}:
+            trade_allowed = False
+            recommended_size = 0.0
+            if risk_decision in {"NO_TRADE", "MANUAL_REVIEW"}:
+                recommended_side = "NONE"
         risk_level = _risk_level(risk_decision)
 
         return {
