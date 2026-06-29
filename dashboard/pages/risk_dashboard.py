@@ -47,7 +47,7 @@ def render(client):
     with colA:
         fig_decision = risk_decision_counts_chart(risk_reports)
         if fig_decision:
-            st.plotly_chart(fig_decision, use_container_width=True)
+            st.plotly_chart(fig_decision, width="stretch")
             
     with colB:
         df_risk = dataframe_from_records(risk_reports)
@@ -55,7 +55,7 @@ def render(client):
             counts = df_risk["risk_level"].value_counts().reset_index()
             counts.columns = ["Risk Level", "Count"]
             fig_level = px.pie(counts, values="Count", names="Risk Level", title="Risk Level Distribution")
-            st.plotly_chart(fig_level, use_container_width=True)
+            st.plotly_chart(fig_level, width="stretch")
 
     st.header("3. Risk-Gated Decisions")
     
@@ -87,15 +87,15 @@ def render(client):
         })
 
     df = dataframe_from_records(data)
-    st.dataframe(df[["city", "model_probability", "market_probability", "raw_edge", "tradeable_edge", "confidence", "risk_level", "risk_decision", "trade_allowed", "recommended_side", "recommended_size"]], use_container_width=True)
+    st.dataframe(df[["city", "model_probability", "market_probability", "raw_edge", "tradeable_edge", "confidence", "risk_level", "risk_decision", "trade_allowed", "recommended_side", "recommended_size"]], width="stretch")
 
     st.header("4. Blocked / Skipped Reasons")
     skipped_df = df[df["trade_allowed"] == "Skipped / No paper order"]
     if not skipped_df.empty:
-        st.dataframe(skipped_df[["city", "risk_decision", "blocked_reason", "reason"]], use_container_width=True)
+        st.dataframe(skipped_df[["city", "risk_decision", "blocked_reason", "reason"]], width="stretch")
     else:
         render_empty_state("No reports were blocked or skipped.")
         
     st.header("5. Exposure Context")
     st.write("Displays the currently recommended paper sizes from the risk models.")
-    st.dataframe(df[["city", "tradeable_edge", "recommended_size"]], use_container_width=True)
+    st.dataframe(df[["city", "tradeable_edge", "recommended_size"]], width="stretch")

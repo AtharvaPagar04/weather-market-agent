@@ -79,17 +79,17 @@ def render(client):
     with chart_col1:
         fig_prob = probability_comparison_chart(data)
         if fig_prob:
-            st.plotly_chart(fig_prob, use_container_width=True)
+            st.plotly_chart(fig_prob, width="stretch")
             
     with chart_col2:
         fig_risk = risk_decision_counts_chart(risk_reports)
         if fig_risk:
-            st.plotly_chart(fig_risk, use_container_width=True)
+            st.plotly_chart(fig_risk, width="stretch")
             
     with chart_col3:
         fig_order = paper_order_status_chart(paper_trades)
         if fig_order:
-            st.plotly_chart(fig_order, use_container_width=True)
+            st.plotly_chart(fig_order, width="stretch")
 
     df = dataframe_from_records(data)
     
@@ -102,17 +102,17 @@ def render(client):
     df["raw_edge"] = df["raw_edge"].apply(format_pct)
 
     st.header("3. Market Watch")
-    st.dataframe(df[["city", "market_slug", "market_source", "market_probability"]], use_container_width=True)
+    st.dataframe(df[["city", "market_slug", "market_source", "market_probability"]], width="stretch")
     
     st.header("4. Edge Matrix")
-    st.dataframe(df[["city", "market_probability", "model_probability", "raw_edge", "confidence"]], use_container_width=True)
+    st.dataframe(df[["city", "market_probability", "model_probability", "raw_edge", "confidence"]], width="stretch")
     
     st.header("5. Latest Paper Decisions")
-    st.dataframe(df[["city", "risk_decision", "trade_allowed", "recommended_side", "paper_status"]], use_container_width=True)
+    st.dataframe(df[["city", "risk_decision", "trade_allowed", "recommended_side", "paper_status"]], width="stretch")
     
     st.header("6. Open Simulated Positions")
     pos_df = df[df["position_status"] == "Open"]
     if not pos_df.empty:
-        st.dataframe(pos_df[["city", "market_slug", "position_status"]], use_container_width=True)
+        st.dataframe(pos_df[["city", "market_slug", "position_status"]], width="stretch")
     else:
         render_empty_state("No open simulated positions.")
