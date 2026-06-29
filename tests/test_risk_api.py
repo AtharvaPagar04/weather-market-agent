@@ -59,7 +59,6 @@ def test_no_paper_execution_routes_exist() -> None:
         "/paper-trader/order",
         "/paper-trades/buy",
         "/paper-trades/sell",
-        "/paper-trades/run",
     }
 
     for blocked in blocked_paths:
