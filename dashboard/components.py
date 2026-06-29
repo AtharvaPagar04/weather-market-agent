@@ -29,7 +29,9 @@ def render_status_badge(status: str) -> str:
     return status.replace("_", " ").title()
 
 
-def render_source_badge(source_type: str | None) -> str:
+def render_source_badge(source_type: str | None, market_slug: str | None = None) -> str:
+    if source_type == "mock" or (market_slug and market_slug.startswith("mock-")):
+        return "Mock / fallback market"
     if not source_type:
         return "Unknown"
     if source_type == "local_simulation":

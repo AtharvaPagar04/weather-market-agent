@@ -73,7 +73,7 @@ def render(client):
             "recommended_side": risk.get("recommended_side", ""),
             "paper_status": render_status_badge(trade.get("status", "")),
             "position_status": render_status_badge(pos.get("status", "")),
-            "market_source": render_source_badge(market_source_map.get(cid, "")),
+            "market_source": render_source_badge(market_source_map.get(cid, ""), risk.get("market_slug", "")),
         })
 
     with chart_col1:

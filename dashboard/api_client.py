@@ -67,8 +67,8 @@ class BackendAPIClient:
         return self._get("/positions", fallback=[])
 
     def get_agent_runs(self) -> list[dict]:
-        return self._get("/agent-runs", fallback=[])
+        return self._get("/agent/runs", fallback=[])
 
     def get_agent_logs(self, run_id: int | None = None) -> list[dict]:
-        endpoint = f"/agent-logs?run_id={run_id}" if run_id else "/agent-logs"
+        endpoint = f"/agent/logs?run_id={run_id}" if run_id else "/agent/logs"
         return self._get(endpoint, fallback=[])
