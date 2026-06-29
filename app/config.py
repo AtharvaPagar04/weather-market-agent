@@ -13,6 +13,12 @@ class Settings(BaseSettings):
 
     APIFY_API_TOKEN: str = ""
 
+    PM_TRADER_ENABLED: bool = False
+    PM_TRADER_ALLOW_ORDER_EXECUTION: bool = False
+    PM_TRADER_USE_MOCK_FALLBACK: bool = True
+    PM_TRADER_COMMAND: str = "pm-trader"
+    PM_TRADER_TIMEOUT_SECONDS: int = 10
+
     USE_MOCK_MARKETS: bool = True
     USE_MOCK_WEATHER: bool = False
 
@@ -28,4 +34,3 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-

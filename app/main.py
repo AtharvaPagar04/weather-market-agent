@@ -7,6 +7,7 @@ from app import database
 from app.api.routes_cities import router as cities_router
 from app.api.routes_health import router as health_router
 from app.api.routes_markets import router as markets_router
+from app.api.routes_paper_trader import router as paper_trader_router
 from app.api.routes_weather import router as weather_router
 from app.config import get_settings
 
@@ -25,3 +26,4 @@ app.include_router(health_router)
 app.include_router(cities_router)
 app.include_router(weather_router)
 app.include_router(markets_router)
+app.include_router(paper_trader_router)

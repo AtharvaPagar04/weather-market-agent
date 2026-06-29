@@ -35,6 +35,8 @@ def test_market_refresh_and_get_markets_endpoints(client: TestClient) -> None:
     refresh_payload = refresh_response.json()
     assert refresh_payload["success"] is True
     assert refresh_payload["market_snapshots_created"] == 5
+    assert refresh_payload["readonly_mode"] is True
+    assert refresh_payload["order_execution_enabled"] is False
 
     markets_response = client.get("/markets")
 
