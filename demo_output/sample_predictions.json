@@ -1,0 +1,72 @@
+[
+  {
+    "city_id": 4,
+    "market_snapshot_id": 5,
+    "market_probability": 0.41,
+    "model_probability": 0.24090909090909093,
+    "confidence": 0.7220454545454544,
+    "edge": -0.16909090909090904,
+    "prediction_label": "model_lower_than_market",
+    "model_version": "baseline_v1",
+    "paper_trading_only": true,
+    "simulated_results": true,
+    "demo_results": true,
+    "created_at": "2026-06-29T11:47:00.029668"
+  },
+  {
+    "city_id": 3,
+    "market_snapshot_id": 3,
+    "market_probability": 0.46,
+    "model_probability": 0.25090909090909097,
+    "confidence": 0.7420454545454545,
+    "edge": -0.20909090909090905,
+    "prediction_label": "model_lower_than_market",
+    "model_version": "baseline_v1",
+    "paper_trading_only": true,
+    "simulated_results": true,
+    "demo_results": true,
+    "created_at": "2026-06-29T11:47:00.029667"
+  },
+  {
+    "city_id": 5,
+    "market_snapshot_id": 4,
+    "market_probability": 0.37,
+    "model_probability": 0.20151515151515154,
+    "confidence": 0.7217424242424242,
+    "edge": -0.16848484848484846,
+    "prediction_label": "model_lower_than_market",
+    "model_version": "baseline_v1",
+    "paper_trading_only": true,
+    "simulated_results": true,
+    "demo_results": true,
+    "created_at": "2026-06-29T11:47:00.029667"
+  },
+  {
+    "city_id": 1,
+    "market_snapshot_id": 2,
+    "market_probability": 0.62,
+    "model_probability": 0.2006060606060606,
+    "confidence": 0.8471969696969697,
+    "edge": -0.41939393939393943,
+    "prediction_label": "model_lower_than_market",
+    "model_version": "baseline_v1",
+    "paper_trading_only": true,
+    "simulated_results": true,
+    "demo_results": true,
+    "created_at": "2026-06-29T11:47:00.029666"
+  },
+  {
+    "city_id": 2,
+    "market_snapshot_id": 1,
+    "market_probability": 0.58,
+    "model_probability": 0.22545454545454546,
+    "confidence": 0.8147727272727272,
+    "edge": -0.3545454545454545,
+    "prediction_label": "model_lower_than_market",
+    "model_version": "baseline_v1",
+    "paper_trading_only": true,
+    "simulated_results": true,
+    "demo_results": true,
+    "created_at": "2026-06-29T11:47:00.029662"
+  }
+]

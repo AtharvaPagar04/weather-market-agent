@@ -8,7 +8,7 @@ st.set_page_config(
 
 from dashboard.api_client import BackendAPIClient
 from dashboard.components import render_backend_status
-from dashboard.pages import overview, predictions, risk_dashboard, paper_trades, agent_logs
+from dashboard.pages import overview, predictions, risk_dashboard, paper_trades, agent_logs, results
 import datetime
 
 def main():
@@ -45,7 +45,7 @@ def main():
 
     page = st.sidebar.radio(
         "Navigation",
-        ["Overview", "Predictions", "Risk Dashboard", "Paper Trades", "Agent Logs"]
+        ["Overview", "Predictions", "Risk Dashboard", "Paper Trades", "Agent Logs", "Results / Evaluation"]
     )
 
     if page == "Overview":
@@ -58,6 +58,8 @@ def main():
         paper_trades.render(client)
     elif page == "Agent Logs":
         agent_logs.render(client)
+    elif page == "Results / Evaluation":
+        results.render(client)
 
 
 if __name__ == "__main__":
