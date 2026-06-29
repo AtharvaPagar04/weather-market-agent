@@ -54,6 +54,17 @@ def test_no_forbidden_terms_except_safety_warning():
             for term in forbidden_terms:
                 assert term.lower() not in content_cleaned.lower(), f"Forbidden term '{term}' found in {file}"
 
+def test_dashboard_uses_current_streamlit_width_api():
+    dashboard_source = ""
+    for root, _, files in os.walk("dashboard"):
+        for file in files:
+            if file.endswith(".py"):
+                with open(os.path.join(root, file), "r") as f:
+                    dashboard_source += f.read()
+
+    assert "use_container_width" not in dashboard_source
+    assert 'width="stretch"' in dashboard_source
+
 def test_required_page_headings_exist():
     required_headings = [
         "Market Watch",

@@ -40,13 +40,13 @@ def render(client):
         
     df_latest = dataframe_from_records(data)
     
-    st.dataframe(df_latest[["City", "Model Probability", "Market Probability", "Raw Edge", "Confidence", "Prediction Label"]], use_container_width=True)
+    st.dataframe(df_latest[["City", "Model Probability", "Market Probability", "Raw Edge", "Confidence", "Prediction Label"]], width="stretch")
 
     st.header("2. Probability Tracker")
     chart_data = [{"city": row["City"], "model_probability": row["model_probability"], "market_probability": row["market_probability"]} for row in data]
     fig = probability_comparison_chart(chart_data)
     if fig:
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         
     st.header("3. Prediction History by City")
     city_options = {c["name"]: c["id"] for c in cities}
@@ -69,9 +69,9 @@ def render(client):
                         "Prediction Label": p.get("prediction_label", "").replace("_", " ").title(),
                     })
                 df_hist = dataframe_from_records(hist_data)
-                st.dataframe(df_hist, use_container_width=True)
+                st.dataframe(df_hist, width="stretch")
             else:
                 render_empty_state("No history available for this city.")
                 
     st.header("4. Explanation Table")
-    st.dataframe(df_latest[["City", "Explanation"]], use_container_width=True)
+    st.dataframe(df_latest[["City", "Explanation"]], width="stretch")

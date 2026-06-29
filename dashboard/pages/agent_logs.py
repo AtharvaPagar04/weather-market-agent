@@ -33,7 +33,7 @@ def render(client):
             "started_at": r.get("created_at"),
             "finished_at": r.get("completed_at"),
         })
-    st.dataframe(dataframe_from_records(runs_data), use_container_width=True)
+    st.dataframe(dataframe_from_records(runs_data), width="stretch")
 
     st.header("2. Agent Step Logs")
     
@@ -86,6 +86,6 @@ def render(client):
                 "created_at": l.get("created_at"),
             })
             
-        st.dataframe(dataframe_from_records(logs_data), use_container_width=True)
+        st.dataframe(dataframe_from_records(logs_data), width="stretch")
     else:
         render_empty_state("No logs for the selected run.")

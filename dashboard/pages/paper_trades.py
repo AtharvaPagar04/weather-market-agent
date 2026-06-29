@@ -40,7 +40,7 @@ def render(client):
     with colA:
         fig_orders = paper_order_status_chart(paper_trades)
         if fig_orders:
-            st.plotly_chart(fig_orders, use_container_width=True)
+            st.plotly_chart(fig_orders, width="stretch")
             
     with colB:
         pos_for_chart = []
@@ -51,7 +51,7 @@ def render(client):
             })
         fig_exp = exposure_by_city_chart(pos_for_chart)
         if fig_exp:
-            st.plotly_chart(fig_exp, use_container_width=True)
+            st.plotly_chart(fig_exp, width="stretch")
 
     st.header("2. Paper Orders / Skipped Decisions")
     if paper_trades:
@@ -75,7 +75,7 @@ def render(client):
                 "reason": t.get("reason", ""),
                 "created_at": t.get("created_at"),
             })
-        st.dataframe(dataframe_from_records(trades_data), use_container_width=True)
+        st.dataframe(dataframe_from_records(trades_data), width="stretch")
     else:
         render_empty_state("No paper orders found.")
 
@@ -94,7 +94,7 @@ def render(client):
                 "unrealized_pnl": format_money(p.get("unrealized_pnl")),
                 "status": str(p.get("status", "")).title(),
             })
-        st.dataframe(dataframe_from_records(pos_data), use_container_width=True)
+        st.dataframe(dataframe_from_records(pos_data), width="stretch")
     else:
         render_empty_state("No simulated positions found.")
         
